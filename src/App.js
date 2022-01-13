@@ -52,24 +52,27 @@ const handleChoice = (item) => {
 }
 
 useEffect(() => {
-       if (firstChoice && secondChoice) {
-        setDisabled(true)
-        if (firstChoice === secondChoice) {
-            setAllOptionsMemory(prevAllOptionsMemory => {
-                return prevAllOptionsMemory.map((item) => {
-                    // console.log(item.name.name)
-                    if (item.name.name === firstChoice) {
-                        return {...item, couple: true}
-                    } else {
-                        return item
-                    }
-            })})
-            newRound()
-        } else {
-            let clearRound = setTimeout(() => newRound(),  1000);
-            return () => {clearTimeout(clearRound);};
-          }
+    if(firstChoice !== null && secondChoice !== null){
+        if (firstChoice.name.name && secondChoice.name.name) {
+            setDisabled(true)
+            if (firstChoice.name.name === secondChoice.name.name) {
+                setAllOptionsMemory(prevAllOptionsMemory => {
+                    return prevAllOptionsMemory.map((item) => {
+                        // console.log(item.name.name)
+                        if (item.name.name === firstChoice.name.name) {
+                            return {...item, couple: true}
+                        } else {
+                            return item
+                        }
+                    })})
+                newRound()
+            } else {
+                let clearRound = setTimeout(() => newRound(),  1000);
+                return () => {clearTimeout(clearRound);};
+            }
+        }
     }
+
 }, [firstChoice, secondChoice])
 
     useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
