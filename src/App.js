@@ -31,12 +31,11 @@ function App() {
 
 
 const handleClickNextGame = () => {
-        console.log("klikam next game")
-        setRound(0);
-        setAllOptionsMemory(shuffleArray(allOptionsMemory))
+    setRound(0);
+    setAllOptionsMemory(shuffleArray([...memoryIconArray, ...memoryIconArray]))
     setFirstChoice(null);
     setSecondChoice(null);
-    };
+     };
 
 const newRound = () => {
     setFirstChoice(null);
@@ -46,8 +45,6 @@ const newRound = () => {
 }
 
 const handleChoice = (item) => {
-    console.log("firstChoice", firstChoice)
-
     firstChoice ? setSecondChoice(item) : setFirstChoice(item)
 }
 
@@ -72,19 +69,13 @@ useEffect(() => {
             }
         }
     }
-
 }, [firstChoice, secondChoice])
 
-    useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
+    // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
     // useEffect(()=>{console.log('allOptionsMemory.name.name', allOptionsMemory[0].name)},[allOptionsMemory])
     // useEffect(()=>{console.log('round', round)},[round])
     // useEffect(()=>{console.log('firstChoice', firstChoice)},[firstChoice])
     // useEffect(()=>{console.log('secondChoice', secondChoice)},[secondChoice])
-
-
-
-
-
 
   return (
       <WrappApp>
@@ -93,17 +84,20 @@ useEffect(() => {
               <BtnNextGame onClick={handleClickNextGame}> nowa gra </BtnNextGame>
           </WrappBtn>
           <Counter>Liczba tur: {round}</Counter>
-          <MainPartMemory allOptionsMemory={allOptionsMemory} handleChoice={handleChoice} firstChoice={firstChoice} secondChoice={secondChoice} disabled={disabled} />
-
+          <MainPartMemory
+              allOptionsMemory={allOptionsMemory}
+              handleChoice={handleChoice}
+              firstChoice={firstChoice}
+              secondChoice={secondChoice}
+              disabled={disabled} />
       </WrappApp>
-
-
   );
 };
 
 export default App;
 
 const WrappApp = styled.div`
+  min-height: 100vh;
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -111,13 +105,13 @@ const WrappApp = styled.div`
   align-items: center;
   align-content: center;
   margin: 0 auto;
+  padding-bottom: 40px;
    * {
      margin: 0px;
      box-sizing: border-box;
      padding: 0px;
    }
-  
-  `
+    `
 
 const Title = styled.h1`
 color: gainsboro;
@@ -125,16 +119,17 @@ font-family: Arial, sans-serif;
 font-size: 26px;
 line-height: 30px;
 text-align: center;
-padding: 20px 0 10px 0;
+padding-bottom: 10px;
 letter-spacing: 2px;
 text-transform: uppercase;  
 border-bottom: 2px solid gainsboro;
+  width: 700px;
   `
 
 const WrappBtn = styled.div`
   background-color: black;
   border: 2px solid gainsboro;
-  margin: 20px auto ;
+  margin: 40px auto 0 auto;
   padding: 12px 26px;
   text-align: center;
   display: flex;
@@ -149,7 +144,6 @@ const BtnNextGame = styled.button`
   font-size: 18px;
   line-height: 20px;
   text-align: center;
-  
   letter-spacing: 2px;
   text-transform: uppercase;
   border: 2px solid transparent;
@@ -163,6 +157,7 @@ const BtnNextGame = styled.button`
 const Counter = styled.h3`
 color: gainsboro;
 font-family: Arial, sans-serif;
+  font-weight: 400;
 font-size: 20px;
 line-height: 30px;
 text-align: center;

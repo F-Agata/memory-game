@@ -1,43 +1,40 @@
 import React, { useState, useEffect }from "react";
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 
 import { ImSpinner9 } from "react-icons/im";
 
-function MainPartMemory({ allOptionsMemory, handleChoice, firstChoice, secondChoice, disabled, position}) {
+function MainPartMemory({ allOptionsMemory, handleChoice, firstChoice, secondChoice, disabled }) {
 
     const handleClick = (item) => {
-        // console.log('nameChoiceCard', nameChoiceCard)
                 if (!disabled) {
             handleChoice(item)
-
         }
-
     }
-
 
     const oneCard = allOptionsMemory.map((item) => {
         // console.log('item', item)
         // console.log('firstChoice', firstChoice)
-        // const rotated = item.name.name === firstChoice && index === position && !secondChoice ? true : false;
+        // console.log("dataRotated", dataRotated)
+
 
         const rotated = item === firstChoice || item === secondChoice || item.couple ? true : false
-        // console.log("rotated", rotated, item)
+        console.log("rotated", rotated, item)
         return (
         <WrappOneCard key={item.id} >
-            <WrappFronCard dataRotated={rotated} data-rotated={rotated}>
+            <WrappFronCard dataRotated={rotated} data-rotated={rotated} >
                 <item.name/>
             </WrappFronCard>
-            <WrappBackCard onClick={(e) => handleClick(item)} dataRotated={rotated} >
+            <WrappBackCard onClick={(e) => handleClick(item)} dataRotated={rotated} data-rotated={rotated}>
                 <BackCard/>
             </WrappBackCard>
         </WrappOneCard>
     )}
     )
-    //
+
     // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
     // useEffect(()=>{console.log('oneCard', oneCard)},[oneCard])
     // useEffect(()=>{console.log('allOptionsMemory[0].name', allOptionsMemory[0].name)},[oneCard])
-    //  useEffect(()=>{console.log('data-rotated', data-rotated)},[oneCard])
+    //  useEffect(()=>{console.log('rotated', rotated)},[oneCard])
     // useEffect(()=>{console.log('allOptionsMemory.name', allOptionsMemory.name)},[allOptionsMemory])
 
     return (
@@ -59,8 +56,7 @@ const WrappMainPartMemory = styled.div`
   `
 
 const WrappOneCard = styled.div `
-    //border: 2px solid red;
-  width: 100%;
+   width: 100%;
   cursor: pointer;
    border-radius: 10px;
   position: relative;
