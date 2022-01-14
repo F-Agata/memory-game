@@ -14,7 +14,6 @@ function MainPartMemory({ allOptionsMemory, handleChoice, firstChoice, secondCho
     const oneCard = allOptionsMemory.map((item) => {
 
         const rotated = item === firstChoice || item === secondChoice || item.couple ? true : false
-        console.log("rotated", rotated, item)
         return (
         <WrappOneCard key={item.id} >
             <WrappFronCard dataRotated={rotated} data-rotated={rotated} >
