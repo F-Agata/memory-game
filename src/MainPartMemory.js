@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { ImSpinner9 } from "react-icons/im";
@@ -12,10 +12,6 @@ function MainPartMemory({ allOptionsMemory, handleChoice, firstChoice, secondCho
     }
 
     const oneCard = allOptionsMemory.map((item) => {
-        // console.log('item', item)
-        // console.log('firstChoice', firstChoice)
-        // console.log("dataRotated", dataRotated)
-
 
         const rotated = item === firstChoice || item === secondChoice || item.couple ? true : false
         console.log("rotated", rotated, item)
@@ -30,7 +26,6 @@ function MainPartMemory({ allOptionsMemory, handleChoice, firstChoice, secondCho
         </WrappOneCard>
     )}
     )
-
     // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
     // useEffect(()=>{console.log('oneCard', oneCard)},[oneCard])
     // useEffect(()=>{console.log('allOptionsMemory[0].name', allOptionsMemory[0].name)},[oneCard])
