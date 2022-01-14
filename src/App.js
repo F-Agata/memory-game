@@ -79,17 +79,19 @@ useEffect(() => {
 
   return (
       <WrappApp>
-          <Title> memory </Title>
-          <WrappBtn>
-              <BtnNextGame onClick={handleClickNextGame}> nowa gra </BtnNextGame>
-          </WrappBtn>
-          <Counter>Liczba tur: {round}</Counter>
-          <MainPartMemory
+          <WrappMemory>
+              <Title> memory </Title>
+                  <WrappBtn>
+                       <BtnNextGame onClick={handleClickNextGame}> nowa gra </BtnNextGame>
+                  </WrappBtn>
+              <Counter>Liczba tur: {round}</Counter>
+              <MainPartMemory
               allOptionsMemory={allOptionsMemory}
               handleChoice={handleChoice}
               firstChoice={firstChoice}
               secondChoice={secondChoice}
               disabled={disabled} />
+          </WrappMemory>
       </WrappApp>
   );
 };
@@ -99,19 +101,25 @@ export default App;
 const WrappApp = styled.div`
   min-height: 100vh;
   background-color: black;
+     * {
+     margin: 0px;
+     box-sizing: border-box;
+     padding: 0px;
+   }
+    `
+
+const WrappMemory = styled.div`
+  min-width: 375px;
+  max-width: 1800px;
+  background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   align-content: center;
   margin: 0 auto;
-  padding-bottom: 40px;
-   * {
-     margin: 0px;
-     box-sizing: border-box;
-     padding: 0px;
-   }
-    `
+  padding: 40px 0px;
+`
 
 const Title = styled.h1`
 color: gainsboro;
@@ -119,12 +127,12 @@ font-family: Arial, sans-serif;
 font-size: 26px;
 line-height: 30px;
 text-align: center;
-padding-bottom: 10px;
+padding-bottom: 10px ;
 letter-spacing: 2px;
 text-transform: uppercase;  
 border-bottom: 2px solid gainsboro;
-  width: 700px;
-  `
+width: 100%;
+    `
 
 const WrappBtn = styled.div`
   background-color: black;

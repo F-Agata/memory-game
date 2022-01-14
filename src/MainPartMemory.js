@@ -47,12 +47,20 @@ function MainPartMemory({ allOptionsMemory, handleChoice, firstChoice, secondCho
 export default MainPartMemory;
 
 const WrappMainPartMemory = styled.div`
-  width: 700px;
+  width: 100%;
+  max-width: 700px;
   background-color: black;
   margin: 20px auto;
+  padding: 0 20px !important;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  @media (min-width: 450px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
   `
 
 const WrappOneCard = styled.div `
