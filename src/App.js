@@ -132,6 +132,7 @@ letter-spacing: 2px;
 text-transform: uppercase;  
 border-bottom: 2px solid gainsboro;
 width: 100%;
+  max-width: 660px;
     `
 
 const WrappBtn = styled.div`
