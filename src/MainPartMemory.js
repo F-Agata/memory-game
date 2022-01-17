@@ -18,7 +18,7 @@ function MainPartMemory({ allOptionsMemory, handleChoice, firstChoice, secondCho
         return (
         <WrappOneCard key={item.id} >
             <WrappFronCard dataRotated={rotated} data-rotated={rotated} >
-                <item.name/>
+                <item.identifier/>
             </WrappFronCard>
             <WrappBackCard onClick={(e) => handleClick(item)} dataRotated={rotated} data-rotated={rotated}>
                 <BackCard/>

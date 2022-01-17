@@ -5,12 +5,12 @@ import MainPartMemory from "../src/MainPartMemory"
 import { ImHome3, ImClock, ImSmile2, ImBell, ImBullhorn, ImCamera } from "react-icons/im"
 
 const memoryIconArray = [
-    {name: ImHome3, couple: false},
-    {name: ImClock, couple: false},
-    {name: ImSmile2, couple: false},
-    {name: ImBullhorn, couple: false},
-    {name: ImCamera, couple: false},
-    {name: ImBell, couple: false},
+    {name: 'ImHome3', identifier: ImHome3, couple: false},
+    {name: 'ImClock', identifier: ImClock, couple: false},
+    {name: 'ImSmile2', identifier: ImSmile2, couple: false},
+    {name: 'ImBullhorn', identifier: ImBullhorn, couple: false},
+    {name: 'ImCamera', identifier: ImCamera, couple: false},
+    {name: 'ImBell', identifier: ImBell, couple: false},
 ];
 
 function shuffleArray(array) {
@@ -50,13 +50,13 @@ const handleChoice = (item) => {
 
 useEffect(() => {
     if(firstChoice !== null && secondChoice !== null){
-        if (firstChoice.name.name && secondChoice.name.name) {
+        if (firstChoice.name && secondChoice.name) {
             setDisabled(true)
-            if (firstChoice.name.name === secondChoice.name.name) {
+            if (firstChoice.name === secondChoice.name) {
                 setAllOptionsMemory(prevAllOptionsMemory => {
                     return prevAllOptionsMemory.map((item) => {
                         // console.log(item.name.name)
-                        if (item.name.name === firstChoice.name.name) {
+                        if (item.name === firstChoice.name) {
                             return {...item, couple: true}
                         } else {
                             return item
