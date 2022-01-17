@@ -1,45 +1,44 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import { ImSpinner9 } from "react-icons/im";
+import { ImSpinner9 } from 'react-icons/im'
 
-function MainPartMemory({ allOptionsMemory, handleChoice, firstChoice, secondChoice, disabled }) {
-
-    const handleClick = (item) => {
-                if (!disabled) {
-            handleChoice(item)
-        }
+function MainPartMemory ({ allOptionsMemory, handleChoice, firstChoice, secondChoice, disabled }) {
+  const handleClick = (item) => {
+    if (!disabled) {
+      handleChoice(item)
     }
+  }
 
-    const oneCard = allOptionsMemory.map((item) => {
-
-        // const rotated = item === firstChoice || item === secondChoice || item.couple ? true : false
-        const rotated = item?.id === firstChoice?.id || item?.id === secondChoice?.id || item?.couple ? true : false;
-        return (
-        <WrappOneCard key={item.id} >
-            <WrappFronCard dataRotated={rotated} data-rotated={rotated} >
-                <item.identifier/>
-            </WrappFronCard>
-            <WrappBackCard onClick={(e) => handleClick(item)} dataRotated={rotated} data-rotated={rotated}>
-                <BackCard/>
-            </WrappBackCard>
-        </WrappOneCard>
-    )}
-    )
-    // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
-    // useEffect(()=>{console.log('oneCard', oneCard)},[oneCard])
-    // useEffect(()=>{console.log('allOptionsMemory[0].name', allOptionsMemory[0].name)},[oneCard])
-    //  useEffect(()=>{console.log('rotated', rotated)},[oneCard])
-    // useEffect(()=>{console.log('allOptionsMemory.name', allOptionsMemory.name)},[allOptionsMemory])
-
+  const oneCard = allOptionsMemory.map((item) => {
+    // const rotated = item === firstChoice || item === secondChoice || item.couple ? true : false
+    const rotated = !!(item?.id === firstChoice?.id || item?.id === secondChoice?.id || item?.couple)
     return (
-        <WrappMainPartMemory>
-                {oneCard}
-        </WrappMainPartMemory>
+      <WrappOneCard key={item.id}>
+        <WrappFronCard dataRotated={rotated} data-rotated={rotated}>
+          <item.identifier />
+        </WrappFronCard>
+        <WrappBackCard onClick={(e) => handleClick(item)} dataRotated={rotated} data-rotated={rotated}>
+          <BackCard />
+        </WrappBackCard>
+      </WrappOneCard>
     )
+  }
+  )
+  // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
+  // useEffect(()=>{console.log('oneCard', oneCard)},[oneCard])
+  // useEffect(()=>{console.log('allOptionsMemory[0].name', allOptionsMemory[0].name)},[oneCard])
+  //  useEffect(()=>{console.log('rotated', rotated)},[oneCard])
+  // useEffect(()=>{console.log('allOptionsMemory.name', allOptionsMemory.name)},[allOptionsMemory])
+
+  return (
+    <WrappMainPartMemory>
+      {oneCard}
+    </WrappMainPartMemory>
+  )
 }
 
-export default MainPartMemory;
+export default MainPartMemory
 
 const WrappMainPartMemory = styled.div`
   width: 100%;
@@ -58,7 +57,7 @@ const WrappMainPartMemory = styled.div`
   }
   `
 
-const WrappOneCard = styled.div `
+const WrappOneCard = styled.div`
    width: 100%;
   cursor: pointer;
    border-radius: 10px;
@@ -74,8 +73,8 @@ const WrappFronCard = styled.div`
   padding: 30px !important;
   position: absolute;
   transition: all ease-in 0.2s;
-  transform: ${props => props.dataRotated ? "rotateY(0deg)" : "rotateY(90deg)"};
-  transition-delay: ${props => props.dataRotated ? "0.2s" : "0s"};
+  transform: ${props => props.dataRotated ? 'rotateY(0deg)' : 'rotateY(90deg)'};
+  transition-delay: ${props => props.dataRotated ? '0.2s' : '0s'};
         * {
     width: 100%;
     height: 100%;
@@ -90,8 +89,8 @@ const WrappBackCard = styled.div`
   color: black;
   padding: 40px !important;
   transition: all ease-in 0.2s;
-  transform: ${props => props.dataRotated ? "rotateY(90deg)" : "rotateY(0deg)"};
-  transition-delay: ${props => props.dataRotated ? "0s" : "0.2s"};
+  transform: ${props => props.dataRotated ? 'rotateY(90deg)' : 'rotateY(0deg)'};
+  transition-delay: ${props => props.dataRotated ? '0s' : '0.2s'};
   * {
     width: 100%;
     height: 100%;
@@ -103,8 +102,3 @@ const BackCard = styled(ImSpinner9)`
   height: 100%;
    
 `
-
-
-
-
-

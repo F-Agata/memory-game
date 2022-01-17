@@ -1,102 +1,102 @@
-import React, { useState, useEffect }from "react";
-import styled from "styled-components";
-import MainPartMemory from "../src/MainPartMemory"
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
+import MainPartMemory from '../src/MainPartMemory'
 
-import { ImHome3, ImClock, ImSmile2, ImBell, ImBullhorn, ImCamera } from "react-icons/im"
+import { ImHome3, ImClock, ImSmile2, ImBell, ImBullhorn, ImCamera } from 'react-icons/im'
 
 const memoryIconArray = [
-    {name: 'ImHome3', identifier: ImHome3, couple: false},
-    {name: 'ImClock', identifier: ImClock, couple: false},
-    {name: 'ImSmile2', identifier: ImSmile2, couple: false},
-    {name: 'ImBullhorn', identifier: ImBullhorn, couple: false},
-    {name: 'ImCamera', identifier: ImCamera, couple: false},
-    {name: 'ImBell', identifier: ImBell, couple: false},
-];
+  { name: 'ImHome3', identifier: ImHome3, couple: false },
+  { name: 'ImClock', identifier: ImClock, couple: false },
+  { name: 'ImSmile2', identifier: ImSmile2, couple: false },
+  { name: 'ImBullhorn', identifier: ImBullhorn, couple: false },
+  { name: 'ImCamera', identifier: ImCamera, couple: false },
+  { name: 'ImBell', identifier: ImBell, couple: false }
+]
 
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array.map((item) =>({ ...item, id: Math.random()}) )
+function shuffleArray (array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]
+  }
+  return array.map((item) => ({ ...item, id: Math.random() }))
 };
 
-function App() {
+function App () {
+  const [allOptionsMemory, setAllOptionsMemory] = useState(shuffleArray([...memoryIconArray, ...memoryIconArray]))
+  const [round, setRound] = useState(0)
+  const [firstChoice, setFirstChoice] = useState(null)
+  const [secondChoice, setSecondChoice] = useState(null)
+  const [disabled, setDisabled] = useState(false)
 
-    const [allOptionsMemory, setAllOptionsMemory] = useState(shuffleArray([...memoryIconArray, ...memoryIconArray]));
-    const [round, setRound] = useState(0)
-    const [firstChoice, setFirstChoice] = useState(null);
-    const [secondChoice, setSecondChoice] = useState(null);
-    const [disabled, setDisabled] = useState(false)
-
-
-const handleClickNextGame = () => {
-    setRound(0);
+  const handleClickNextGame = () => {
+    setRound(0)
     setAllOptionsMemory(shuffleArray([...memoryIconArray, ...memoryIconArray]))
-    setFirstChoice(null);
-    setSecondChoice(null);
-     };
+    setFirstChoice(null)
+    setSecondChoice(null)
+  }
 
-const newRound = () => {
-    setFirstChoice(null);
-    setSecondChoice(null);
-    setRound(prevRound => prevRound + 1);
+  const newRound = () => {
+    setFirstChoice(null)
+    setSecondChoice(null)
+    setRound(prevRound => prevRound + 1)
     setDisabled(false)
-}
+  }
 
-const handleChoice = (item) => {
+  const handleChoice = (item) => {
     firstChoice ? setSecondChoice(item) : setFirstChoice(item)
-}
+  }
 
-useEffect(() => {
-    if(firstChoice !== null && secondChoice !== null){
-        if (firstChoice.name && secondChoice.name) {
-            setDisabled(true)
-            if (firstChoice.name === secondChoice.name) {
-                setAllOptionsMemory(prevAllOptionsMemory => {
-                    return prevAllOptionsMemory.map((item) => {
-                        // console.log(item.name.name)
-                        if (item.name === firstChoice.name) {
-                            return {...item, couple: true}
-                        } else {
-                            return item
-                        }
-                    })})
-                newRound()
-            } else {
-                let clearRound = setTimeout(() => newRound(),  1000);
-                return () => {clearTimeout(clearRound);};
-            }
+  useEffect(() => {
+    if (firstChoice !== null && secondChoice !== null) {
+      if (firstChoice.name && secondChoice.name) {
+        setDisabled(true)
+        if (firstChoice.name === secondChoice.name) {
+          setAllOptionsMemory(prevAllOptionsMemory => {
+            return prevAllOptionsMemory.map((item) => {
+              // console.log(item.name.name)
+              if (item.name === firstChoice.name) {
+                return { ...item, couple: true }
+              } else {
+                return item
+              }
+            })
+          })
+          newRound()
+        } else {
+          const clearRound = setTimeout(() => newRound(), 1000)
+          return () => { clearTimeout(clearRound) }
         }
+      }
     }
-}, [firstChoice, secondChoice])
+  }, [firstChoice, secondChoice])
 
-    // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
-    // useEffect(()=>{console.log('allOptionsMemory.name.name', allOptionsMemory[0].name)},[allOptionsMemory])
-    // useEffect(()=>{console.log('round', round)},[round])
-    // useEffect(()=>{console.log('firstChoice', firstChoice)},[firstChoice])
-    // useEffect(()=>{console.log('secondChoice', secondChoice)},[secondChoice])
+  // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
+  // useEffect(()=>{console.log('allOptionsMemory.name.name', allOptionsMemory[0].name)},[allOptionsMemory])
+  // useEffect(()=>{console.log('round', round)},[round])
+  // useEffect(()=>{console.log('firstChoice', firstChoice)},[firstChoice])
+  // useEffect(()=>{console.log('secondChoice', secondChoice)},[secondChoice])
 
   return (
-      <WrappApp>
-          <WrappMemory>
-              <Title> memory </Title>
-                  <WrappBtn>
-                       <BtnNextGame onClick={handleClickNextGame}> nowa gra </BtnNextGame>
-                  </WrappBtn>
-              <Counter>Liczba tur: {round}</Counter>
-              <MainPartMemory
-              allOptionsMemory={allOptionsMemory}
-              handleChoice={handleChoice}
-              firstChoice={firstChoice}
-              secondChoice={secondChoice}
-              disabled={disabled} />
-          </WrappMemory>
-      </WrappApp>
-  );
+    <WrappApp>
+      <WrappMemory>
+        <Title> memory </Title>
+        <WrappBtn>
+          <BtnNextGame onClick={handleClickNextGame}> nowa gra </BtnNextGame>
+        </WrappBtn>
+        <Counter>Liczba tur: {round}</Counter>
+        <MainPartMemory
+          allOptionsMemory={allOptionsMemory}
+          handleChoice={handleChoice}
+          firstChoice={firstChoice}
+          secondChoice={secondChoice}
+          disabled={disabled}
+        />
+      </WrappMemory>
+    </WrappApp>
+  )
 };
 
-export default App;
+export default App
 
 const WrappApp = styled.div`
   min-height: 100vh;
@@ -132,7 +132,7 @@ letter-spacing: 2px;
 text-transform: uppercase;  
 border-bottom: 2px solid gainsboro;
 width: 100%;
-  max-width: 660px;
+max-width: 660px;
     `
 
 const WrappBtn = styled.div`
@@ -175,4 +175,3 @@ letter-spacing: 2px;
 text-transform: uppercase;  
 margin-bottom: 20px;  
 `
-
