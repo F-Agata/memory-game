@@ -11,7 +11,6 @@ function MainPartMemory ({ allOptionsMemory, handleChoice, firstChoice, secondCh
   }
 
   const oneCard = allOptionsMemory.map((item) => {
-    // const rotated = item === firstChoice || item === secondChoice || item.couple ? true : false
     const rotated = !!(item?.id === firstChoice?.id || item?.id === secondChoice?.id || item?.couple)
     return (
       <WrappOneCard key={item.id}>
@@ -25,12 +24,6 @@ function MainPartMemory ({ allOptionsMemory, handleChoice, firstChoice, secondCh
     )
   }
   )
-  // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
-  // useEffect(()=>{console.log('oneCard', oneCard)},[oneCard])
-  // useEffect(()=>{console.log('allOptionsMemory[0].name', allOptionsMemory[0].name)},[oneCard])
-  //  useEffect(()=>{console.log('rotated', rotated)},[oneCard])
-  // useEffect(()=>{console.log('allOptionsMemory.name', allOptionsMemory.name)},[allOptionsMemory])
-
   return (
     <WrappMainPartMemory>
       {oneCard}

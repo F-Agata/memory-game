@@ -70,12 +70,6 @@ function App () {
     }
   }, [firstChoice, secondChoice])
 
-  // useEffect(()=>{console.log('allOptionsMemory', allOptionsMemory)},[allOptionsMemory])
-  // useEffect(()=>{console.log('allOptionsMemory.name.name', allOptionsMemory[0].name)},[allOptionsMemory])
-  // useEffect(()=>{console.log('round', round)},[round])
-  // useEffect(()=>{console.log('firstChoice', firstChoice)},[firstChoice])
-  // useEffect(()=>{console.log('secondChoice', secondChoice)},[secondChoice])
-
   return (
     <WrappApp>
       <WrappMemory>
