@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import MainPartMemory from '../src/MainPartMemory'
 
-import { ImHome3, ImClock, ImSmile2, ImBell, ImBullhorn, ImCamera } from 'react-icons/im'
+import {
+  ImHome3,
+  ImClock,
+  ImSmile2,
+  ImBell,
+  ImBullhorn,
+  ImCamera,
+} from 'react-icons/im'
 
 const memoryIconArray = [
   { name: 'ImHome3', identifier: ImHome3, couple: false },
@@ -10,19 +17,21 @@ const memoryIconArray = [
   { name: 'ImSmile2', identifier: ImSmile2, couple: false },
   { name: 'ImBullhorn', identifier: ImBullhorn, couple: false },
   { name: 'ImCamera', identifier: ImCamera, couple: false },
-  { name: 'ImBell', identifier: ImBell, couple: false }
+  { name: 'ImBell', identifier: ImBell, couple: false },
 ]
 
-function shuffleArray (array) {
+function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
   }
   return array.map((item) => ({ ...item, id: Math.random() }))
-};
+}
 
-function App () {
-  const [allOptionsMemory, setAllOptionsMemory] = useState(shuffleArray([...memoryIconArray, ...memoryIconArray]))
+function App() {
+  const [allOptionsMemory, setAllOptionsMemory] = useState(
+    shuffleArray([...memoryIconArray, ...memoryIconArray]),
+  )
   const [round, setRound] = useState(0)
   const [firstChoice, setFirstChoice] = useState(null)
   const [secondChoice, setSecondChoice] = useState(null)
@@ -38,7 +47,7 @@ function App () {
   const newRound = () => {
     setFirstChoice(null)
     setSecondChoice(null)
-    setRound(prevRound => prevRound + 1)
+    setRound((prevRound) => prevRound + 1)
     setDisabled(false)
   }
 
@@ -51,7 +60,7 @@ function App () {
       if (firstChoice.name && secondChoice.name) {
         setDisabled(true)
         if (firstChoice.name === secondChoice.name) {
-          setAllOptionsMemory(prevAllOptionsMemory => {
+          setAllOptionsMemory((prevAllOptionsMemory) => {
             return prevAllOptionsMemory.map((item) => {
               // console.log(item.name.name)
               if (item.name === firstChoice.name) {
@@ -64,7 +73,9 @@ function App () {
           newRound()
         } else {
           const clearRound = setTimeout(() => newRound(), 1000)
-          return () => { clearTimeout(clearRound) }
+          return () => {
+            clearTimeout(clearRound)
+          }
         }
       }
     }
@@ -88,19 +99,19 @@ function App () {
       </WrappMemory>
     </WrappApp>
   )
-};
+}
 
 export default App
 
 const WrappApp = styled.div`
   min-height: 100vh;
   background-color: black;
-     * {
-     margin: 0px;
-     box-sizing: border-box;
-     padding: 0px;
-   }
-    `
+  * {
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+  }
+`
 
 const WrappMemory = styled.div`
   min-width: 375px;
@@ -116,18 +127,18 @@ const WrappMemory = styled.div`
 `
 
 const Title = styled.h1`
-color: gainsboro;
-font-family: Arial, sans-serif;
-font-size: 26px;
-line-height: 30px;
-text-align: center;
-padding-bottom: 10px ;
-letter-spacing: 2px;
-text-transform: uppercase;  
-border-bottom: 2px solid gainsboro;
-width: 100%;
-max-width: 660px;
-    `
+  color: gainsboro;
+  font-family: Arial, sans-serif;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+  padding-bottom: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 2px solid gainsboro;
+  width: 100%;
+  max-width: 660px;
+`
 
 const WrappBtn = styled.div`
   background-color: black;
@@ -158,14 +169,14 @@ const BtnNextGame = styled.button`
 `
 
 const Counter = styled.h3`
-color: gainsboro;
-font-family: Arial, sans-serif;
+  color: gainsboro;
+  font-family: Arial, sans-serif;
   font-weight: 400;
-font-size: 20px;
-line-height: 30px;
-text-align: center;
-padding: 20px 0 10px 0;
-letter-spacing: 2px;
-text-transform: uppercase;  
-margin-bottom: 20px;  
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  padding: 20px 0 10px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 `

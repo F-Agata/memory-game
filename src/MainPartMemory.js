@@ -3,7 +3,13 @@ import styled from 'styled-components'
 
 import { ImSpinner9 } from 'react-icons/im'
 
-function MainPartMemory ({ allOptionsMemory, handleChoice, firstChoice, secondChoice, disabled }) {
+function MainPartMemory({
+  allOptionsMemory,
+  handleChoice,
+  firstChoice,
+  secondChoice,
+  disabled,
+}) {
   const handleClick = (item) => {
     if (!disabled) {
       handleChoice(item)
@@ -11,24 +17,27 @@ function MainPartMemory ({ allOptionsMemory, handleChoice, firstChoice, secondCh
   }
 
   const oneCard = allOptionsMemory.map((item) => {
-    const rotated = !!(item?.id === firstChoice?.id || item?.id === secondChoice?.id || item?.couple)
+    const rotated = !!(
+      item?.id === firstChoice?.id ||
+      item?.id === secondChoice?.id ||
+      item?.couple
+    )
     return (
       <WrappOneCard key={item.id}>
         <WrappFronCard dataRotated={rotated} data-rotated={rotated}>
           <item.identifier />
         </WrappFronCard>
-        <WrappBackCard onClick={(e) => handleClick(item)} dataRotated={rotated} data-rotated={rotated}>
+        <WrappBackCard
+          onClick={(e) => handleClick(item)}
+          dataRotated={rotated}
+          data-rotated={rotated}
+        >
           <BackCard />
         </WrappBackCard>
       </WrappOneCard>
     )
-  }
-  )
-  return (
-    <WrappMainPartMemory>
-      {oneCard}
-    </WrappMainPartMemory>
-  )
+  })
+  return <WrappMainPartMemory>{oneCard}</WrappMainPartMemory>
 }
 
 export default MainPartMemory
@@ -48,14 +57,14 @@ const WrappMainPartMemory = styled.div`
   @media (min-width: 600px) {
     grid-template-columns: repeat(4, 1fr);
   }
-  `
+`
 
 const WrappOneCard = styled.div`
-   width: 100%;
+  width: 100%;
   cursor: pointer;
-   border-radius: 10px;
+  border-radius: 10px;
   position: relative;
-  `
+`
 
 const WrappFronCard = styled.div`
   width: 100%;
@@ -66,32 +75,39 @@ const WrappFronCard = styled.div`
   padding: 30px !important;
   position: absolute;
   transition: all ease-in 0.2s;
-  transform: ${props => props.dataRotated ? 'rotateY(0deg)' : 'rotateY(90deg)'};
-  transition-delay: ${props => props.dataRotated ? '0.2s' : '0s'};
-        * {
+  transform: ${(props) =>
+    props.dataRotated ? 'rotateY(0deg)' : 'rotateY(90deg)'};
+  transition-delay: ${(props) => (props.dataRotated ? '0.2s' : '0s')};
+  * {
     width: 100%;
     height: 100%;
-  }  
+  }
 `
 
 const WrappBackCard = styled.div`
   width: 100%;
   border: 2px solid gainsboro;
   border-radius: 10px;
-  background: linear-gradient(130deg, rgba(220,220,220,1) 0%, rgba(220,220,220,0.5) 44%, rgba(220,220,220,0.7) 78%, rgba(220,220,220,1) 100%);
+  background: linear-gradient(
+    130deg,
+    rgba(220, 220, 220, 1) 0%,
+    rgba(220, 220, 220, 0.5) 44%,
+    rgba(220, 220, 220, 0.7) 78%,
+    rgba(220, 220, 220, 1) 100%
+  );
   color: black;
   padding: 40px !important;
   transition: all ease-in 0.2s;
-  transform: ${props => props.dataRotated ? 'rotateY(90deg)' : 'rotateY(0deg)'};
-  transition-delay: ${props => props.dataRotated ? '0s' : '0.2s'};
+  transform: ${(props) =>
+    props.dataRotated ? 'rotateY(90deg)' : 'rotateY(0deg)'};
+  transition-delay: ${(props) => (props.dataRotated ? '0s' : '0.2s')};
   * {
     width: 100%;
     height: 100%;
-  }  
+  }
 `
 
 const BackCard = styled(ImSpinner9)`
   width: 100%;
   height: 100%;
-   
 `
